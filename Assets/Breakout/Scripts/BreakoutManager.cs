@@ -19,6 +19,10 @@ public class BreakoutManager : MonoBehaviour
     //I keep a list of all bricks that exist
     public List<BrickController> AllBricks;
     
+    //brick placement locations
+    float brickx = -6.8f;
+    float bricky = 4;
+
     void Start()
     {
         //I need to register myself as 'the' BreakoutManager
@@ -26,8 +30,17 @@ public class BreakoutManager : MonoBehaviour
 
         //This is the code for spawning bricks. It's not very good.
         //How could we make this spawn lots of bricks more efficiently?
-        Instantiate(BrickPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-        Instantiate(BrickPrefab, new Vector3(0, 1.5f, 0), Quaternion.identity);
+        
+        for (int n = 1; n < 42; n++)
+        {
+            Instantiate(BrickPrefab, new Vector3(brickx, bricky, 0), Quaternion.identity);
+            brickx = brickx + 2.3f;
+            if (n % 7 == 0)
+            {
+                bricky = bricky - 0.7f;
+                brickx = -6.8f;
+            }
+        }
     }
 
     void Update()

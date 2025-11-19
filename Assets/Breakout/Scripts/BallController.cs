@@ -11,6 +11,8 @@ public class BallController : MonoBehaviour
     public Vector2 StartVel;
     //My starting position, where I respawn into. I set this in Start()
     public Vector3 StartPos;
+    //This velocity controls how fast the ball should go
+    private Vector2 IncreasedVel;
     
     void Start()
     {
@@ -18,6 +20,7 @@ public class BallController : MonoBehaviour
         StartPos = transform.position;
         //I check my StartVelocity variable and set that to be my velocity
         RB.linearVelocity = StartVel;
+        IncreasedVel = StartVel;
     }
 
     void Update()
@@ -44,6 +47,24 @@ public class BallController : MonoBehaviour
             //I should also be aimed based on where I hit the paddle
             //I ask the paddle to calculate this for me
             vel.x = pc.BounceAngle(this);
+            //make ball to speed up
+            if (vel.x > 0)
+            {
+                vel.x += 1;
+            }
+            else
+            {
+                vel.x -= 1;
+            }
+            
+            if (vel.y > 0)
+            {
+                vel.y += 1;
+            }
+            else
+            {
+                vel.y -= 1;
+            }
         }
 
         //Did I hit a brick?

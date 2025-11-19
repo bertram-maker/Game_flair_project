@@ -6,6 +6,7 @@ public class PaddleController : MonoBehaviour
 {
     public float Speed;
     public float ScreenBounds;
+    public float angle;
     
     void Update()
     {
@@ -36,6 +37,6 @@ public class PaddleController : MonoBehaviour
     {
         //Currently, the ball keeps its old X velocity
         //This is an intentionally bad answer--can you fix it?
-        return ball.RB.linearVelocity.x;
+        return (ball.transform.position.x - transform.position.x) * angle;
     }
 }
