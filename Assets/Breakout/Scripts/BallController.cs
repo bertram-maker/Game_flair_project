@@ -14,13 +14,18 @@ public class BallController : MonoBehaviour
     //This velocity controls how fast the ball should go
     private Vector2 IncreasedVel;
     //Is the cap for how fast the ball can go
-    public float speedCap;
+    public float BallSpeedCap;
     //the cap for how far the angle can be
     public float angleCap;
+    //the cap for the paddle speed
+    public float PaddleSpeedCap;
+    
     //paddle controller as a variable
     public PaddleController PC;
     //saves the orginal angle
     private float StartAngle;
+    //saves the original paddle speed
+    private float PaddleSpeed;
     
     void Start()
     {
@@ -31,6 +36,7 @@ public class BallController : MonoBehaviour
         IncreasedVel = StartVel;
 
         StartAngle = PC.angle;
+        PaddleSpeed = PC.Speed;
     }
 
     void Update()
@@ -41,6 +47,7 @@ public class BallController : MonoBehaviour
             transform.position = StartPos;
             RB.linearVelocity = StartVel;
             PC.angle = StartAngle;
+            PC.Speed = PaddleSpeed;
         }
     }
 
@@ -60,7 +67,7 @@ public class BallController : MonoBehaviour
             vel.x = pc.BounceAngle(this);
             
             //make ball speed up vertically
-            if (vel.y <= speedCap && vel.y > (speedCap * -1))
+            if (vel.y <= BallSpeedCap && vel.y > (BallSpeedCap * -1))
             {
                 if (vel.y > 0)
                 {
@@ -76,13 +83,20 @@ public class BallController : MonoBehaviour
                 Debug.Log("limit reached!");
             }
             //make the ball speed up horizontally
-            if (vel.x <= speedCap && vel.x > (speedCap * -1))
+            if (vel.x <= BallSpeedCap && vel.x > (BallSpeedCap * -1))
             {
                 //angle
                 if (PC.angle <= angleCap)
                 {
                     PC.angle += 1;
                 }
+                
+                //paddle speed
+                if (PC.Speed < PaddleSpeedCap)
+                {
+                    PC.Speed += 1;
+                }
+
                 //x velocity
                 if (vel.x > 0)
                 {
