@@ -13,6 +13,14 @@ public class BallController : MonoBehaviour
     public Vector3 StartPos;
     //This velocity controls how fast the ball should go
     private Vector2 IncreasedVel;
+    //Is the cap for how fast the ball can go
+    public float speedCap;
+    //the cap for how far the angle can be
+    public float angleCap;
+    //paddle controller as a variable
+    public PaddleController PC;
+    //saves the orginal angle
+    private float StartAngle;
     
     void Start()
     {
@@ -21,6 +29,8 @@ public class BallController : MonoBehaviour
         //I check my StartVelocity variable and set that to be my velocity
         RB.linearVelocity = StartVel;
         IncreasedVel = StartVel;
+
+        StartAngle = PC.angle;
     }
 
     void Update()
@@ -30,6 +40,7 @@ public class BallController : MonoBehaviour
         {
             transform.position = StartPos;
             RB.linearVelocity = StartVel;
+            PC.angle = StartAngle;
         }
     }
 
@@ -47,23 +58,44 @@ public class BallController : MonoBehaviour
             //I should also be aimed based on where I hit the paddle
             //I ask the paddle to calculate this for me
             vel.x = pc.BounceAngle(this);
-            //make ball to speed up
-            if (vel.x > 0)
-            {
-                vel.x += 1;
-            }
-            else
-            {
-                vel.x -= 1;
-            }
             
-            if (vel.y > 0)
+            //make ball speed up vertically
+            if (vel.y <= speedCap && vel.y > (speedCap * -1))
             {
-                vel.y += 1;
+                if (vel.y > 0)
+                {
+                    vel.y += 1;
+                }
+                else
+                {
+                    vel.y -= 1;
+                }
             }
             else
             {
-                vel.y -= 1;
+                Debug.Log("limit reached!");
+            }
+            //make the ball speed up horizontally
+            if (vel.x <= speedCap && vel.x > (speedCap * -1))
+            {
+                //angle
+                if (PC.angle <= angleCap)
+                {
+                    PC.angle += 1;
+                }
+                //x velocity
+                if (vel.x > 0)
+                {
+                    vel.x += 1;
+                }
+                else
+                {
+                    vel.x -= 1;
+                }
+            }
+            else
+            {
+                Debug.Log("limit reached!");
             }
         }
 
