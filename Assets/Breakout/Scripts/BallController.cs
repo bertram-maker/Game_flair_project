@@ -78,10 +78,7 @@ public class BallController : MonoBehaviour
                     vel.y -= 1;
                 }
             }
-            else
-            {
-                Debug.Log("limit reached!");
-            }
+
             //make the ball speed up horizontally
             if (vel.x <= BallSpeedCap && vel.x > (BallSpeedCap * -1))
             {
@@ -91,7 +88,7 @@ public class BallController : MonoBehaviour
                     PC.angle += 1;
                 }
                 
-                //paddle speed
+                //paddle speed. Maybe move this to the end and make it so that when vel.x/vel.y gets high enough it speeds up the paddle
                 if (PC.Speed < PaddleSpeedCap)
                 {
                     PC.Speed += 1;
@@ -106,10 +103,6 @@ public class BallController : MonoBehaviour
                 {
                     vel.x -= 1;
                 }
-            }
-            else
-            {
-                Debug.Log("limit reached!");
             }
         }
 

@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class BrickController : MonoBehaviour
 {
     public SpriteRenderer SR;
+    public ParticleSystem ParticlePrefab;
+    private Color brick_color;
     
     void Start()
     {
@@ -15,6 +17,7 @@ public class BrickController : MonoBehaviour
         BreakoutManager.Me.AllBricks.Add(this);
         //Make yourself a random color
         SR.color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+        //brick_color = SR.color;
     }
 
     //This code makes the brick break
@@ -22,6 +25,13 @@ public class BrickController : MonoBehaviour
     {
         //Destroy the brick
         //If we wanted to make any fancy effects, we could do that here
+
+        //change particle color
+        ParticleSystem.MainModule mainModule = ParticlePrefab.main;
+        mainModule.startColor = new ParticleSystem.MinMaxGradient(SR.color);
+        //spawn particles
+        Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 
