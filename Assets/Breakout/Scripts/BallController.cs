@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BallController : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class BallController : MonoBehaviour
     
     //paddle controller as a variable
     public PaddleController PC;
+    //saves the score text as a variable
+    public TextMeshPro ScoreDisplay;
+    //score
+    private float score = 0;
+
     //saves the orginal angle
     private float StartAngle;
     //saves the original paddle speed
@@ -37,6 +43,9 @@ public class BallController : MonoBehaviour
 
         StartAngle = PC.angle;
         PaddleSpeed = PC.Speed;
+
+        score += 100;
+        ScoreDisplay.text = "Score: " + score;
     }
 
     void Update()
@@ -110,6 +119,7 @@ public class BallController : MonoBehaviour
         BrickController bc = other.gameObject.GetComponent<BrickController>();
         if (bc != null)
         {
+            
             //If so, I bounce vertically
             //MINOR BUG: if I hit a brick from the side I should bounce horizontally
             vel.y *= -1;

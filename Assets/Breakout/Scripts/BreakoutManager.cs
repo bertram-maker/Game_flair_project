@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class BreakoutManager : MonoBehaviour
 {
     //I use a static variable to make this accessible from anywhere
@@ -12,7 +13,7 @@ public class BreakoutManager : MonoBehaviour
     //As a manager, I keep a link to all the major game elements
     public PaddleController Paddle;
     public BallController Ball;
-    
+
     //The brick prefab
     public BrickController BrickPrefab;
     

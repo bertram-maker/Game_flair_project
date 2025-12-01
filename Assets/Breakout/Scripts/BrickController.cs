@@ -26,12 +26,11 @@ public class BrickController : MonoBehaviour
         //Destroy the brick
         //If we wanted to make any fancy effects, we could do that here
 
-        //change particle color
-        ParticleSystem.MainModule mainModule = ParticlePrefab.main;
-        mainModule.startColor = new ParticleSystem.MinMaxGradient(SR.color);
-        //spawn particles
-        Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
 
+        //change particle color & spawn particles
+        ParticleSystem ps = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem.MainModule mainModule = ps.main;
+        mainModule.startColor = new ParticleSystem.MinMaxGradient(SR.color);
         Destroy(gameObject);
     }
 
