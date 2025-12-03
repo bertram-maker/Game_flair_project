@@ -23,10 +23,14 @@ public class BallController : MonoBehaviour
     
     //paddle controller as a variable
     public PaddleController PC;
+    
     //saves the score text as a variable
     public TextMeshPro ScoreDisplay;
     //score
-    private float score = 0;
+    public static float score = 0;
+    //score multiplier
+    private float mult;
+    private float startMult = 0;
 
     //saves the orginal angle
     private float StartAngle;
@@ -44,8 +48,8 @@ public class BallController : MonoBehaviour
         StartAngle = PC.angle;
         PaddleSpeed = PC.Speed;
 
-        score += 100;
         ScoreDisplay.text = "Score: " + score;
+        mult = startMult;
     }
 
     void Update()
@@ -57,6 +61,7 @@ public class BallController : MonoBehaviour
             RB.linearVelocity = StartVel;
             PC.angle = StartAngle;
             PC.Speed = PaddleSpeed;
+            mult = startMult;
         }
     }
 
@@ -125,6 +130,9 @@ public class BallController : MonoBehaviour
             vel.y *= -1;
             //Also I tell the brick to break
             bc.Break();
+            mult += 1;
+            score += 100 * mult;
+            ScoreDisplay.text = "Score: " + score;
         }
 
         //If I hit a vertical wall, I bounce horizontally

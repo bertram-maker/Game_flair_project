@@ -708,8 +708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.1, y: 6.02}
-  m_SizeDelta: {x: 5.2302, y: 1.6207}
+  m_AnchoredPosition: {x: -0.222, y: 6.02}
+  m_SizeDelta: {x: 22.9862, y: 1.6207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2044917570
 GameObject:
@@ -881,6 +881,10 @@ PrefabInstance:
       propertyPath: BallSpeedCap
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3284146719190942760, guid: f36109669e3d5ba41afdbf25498eea1c, type: 3}
+      propertyPath: ScoreDisplay
+      value: 
+      objectReference: {fileID: 1971970250}
     - target: {fileID: 3284146719190942760, guid: f36109669e3d5ba41afdbf25498eea1c, type: 3}
       propertyPath: PaddleSpeedCap
       value: 18
