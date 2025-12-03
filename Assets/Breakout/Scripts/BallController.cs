@@ -118,6 +118,7 @@ public class BallController : MonoBehaviour
                     vel.x -= 1;
                 }
             }
+            mult = startMult;
         }
 
         //Did I hit a brick?
