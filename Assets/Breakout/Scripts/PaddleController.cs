@@ -35,8 +35,7 @@ public class PaddleController : MonoBehaviour
     //AKA-how does aiming with the paddle work
     public float BounceAngle(BallController ball)
     {
-        //Currently, the ball keeps its old X velocity
-        //This is an intentionally bad answer--can you fix it?
+        //ball now aims
         return (ball.transform.position.x - transform.position.x) * angle;
     }
 }

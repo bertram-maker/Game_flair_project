@@ -24,6 +24,9 @@ public class BallController : MonoBehaviour
     //paddle controller as a variable
     public PaddleController PC;
     
+    //save blocker as a variable
+    public BlockerController BLC;
+    
     //saves the score text as a variable
     public TextMeshPro ScoreDisplay;
     //score
@@ -119,6 +122,16 @@ public class BallController : MonoBehaviour
                 }
             }
             mult = startMult;
+        }
+        
+        //Did I hit the blocker?
+        BlockerController blc = other.gameObject.GetComponent<BlockerController>();
+        if (blc != null)
+        {
+            //bounce back up
+            vel.y *= -1;
+            //ask the paddle to calulate where I should aim (based on where I hit the paddle)
+            vel.x = blc.BounceAngle(this);
         }
 
         //Did I hit a brick?
