@@ -506,6 +506,7 @@ MonoBehaviour:
   speed: 5
   start: 7
   end: -7
+  PC: {fileID: 421266890}
 --- !u!1 &1777227751
 GameObject:
   m_ObjectHideFlags: 0

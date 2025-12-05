@@ -40,6 +40,7 @@ public class BallController : MonoBehaviour
     //saves the original paddle speed
     private float PaddleSpeed;
     
+    
     void Start()
     {
         //I record where I started, so I can respawn there
@@ -53,18 +54,21 @@ public class BallController : MonoBehaviour
 
         ScoreDisplay.text = "Score: " + score;
         mult = startMult;
+        
     }
 
     void Update()
     {
         //If I'm off-screen, I respawn with my initial position & speed
-        if (transform.position.y < -10)
+        if (transform.position.y < -10 || transform.position.y > 10 || transform.position.x < -13 || transform.position.x > 13)
         {
             transform.position = StartPos;
             RB.linearVelocity = StartVel;
             PC.angle = StartAngle;
             PC.Speed = PaddleSpeed;
+            //reset score
             mult = startMult;
+            ScoreDisplay.text = "Score: " + score;
         }
     }
 
@@ -121,7 +125,9 @@ public class BallController : MonoBehaviour
                     vel.x -= 1;
                 }
             }
+            //reset score
             mult = startMult;
+            ScoreDisplay.text = "Score: " + score;
         }
         
         //Did I hit the blocker?
@@ -144,9 +150,21 @@ public class BallController : MonoBehaviour
             vel.y *= -1;
             //Also I tell the brick to break
             bc.Break();
+            
+            //calculate score
             mult += 1;
             score += 100 * mult;
-            ScoreDisplay.text = "Score: " + score;
+            
+            //display combo if the player has one
+            if (mult > 1)
+            {
+                StartCoroutine(messageQue());
+            }
+            else
+            {
+                ScoreDisplay.text = "Score: " + score;
+            }
+            
         }
 
         //If I hit a vertical wall, I bounce horizontally
@@ -163,5 +181,14 @@ public class BallController : MonoBehaviour
 
         //Now that I've calculated any bouncing I need to do, plug that into my rigidbody
         RB.linearVelocity = vel;
+    }
+
+    IEnumerator messageQue()
+    {
+        for (int n = 1; n < 4; n++)
+        {
+            ScoreDisplay.text = "Score: " + score + " " + mult + "X";
+            yield return new WaitForSeconds(0.9f);
+        }
     }
 }

@@ -7,6 +7,7 @@ public class BlockerController : MonoBehaviour
     public float end;
     private float negSpeed;
     private float posSpeed;
+    public PaddleController PC;
     
     
     void Start()
@@ -41,6 +42,6 @@ public class BlockerController : MonoBehaviour
     public float BounceAngle(BallController ball)
     {
         //ball now aims
-        return (ball.transform.position.x - transform.position.x) * 2;
+        return (ball.transform.position.x - transform.position.x) * PC.angle;
     }
 }
