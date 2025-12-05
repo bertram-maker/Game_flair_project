@@ -177,7 +177,7 @@
       }
     },
     "com.unity.nuget.mono-cecil": {
-      "version": "1.11.5",
+      "version": "1.11.4",
       "depth": 3,
       "source": "registry",
       "dependencies": {},
