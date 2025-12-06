@@ -77,6 +77,9 @@ public class BallController : MonoBehaviour
         //If I hit something, I'm going to bounce. Let's calculate my new velocity
         Vector2 vel = RB.linearVelocity;
         
+        //play animation for hit
+        
+        
         //Did I hit the paddle?
         PaddleController pc = other.gameObject.GetComponent<PaddleController>();
         if (pc != null)
@@ -185,7 +188,7 @@ public class BallController : MonoBehaviour
 
     IEnumerator messageQue()
     {
-        for (int n = 1; n < 4; n++)
+        for (int n = 1; n < mult; n++)
         {
             ScoreDisplay.text = "Score: " + score + " " + mult + "X";
             yield return new WaitForSeconds(0.9f);
