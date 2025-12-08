@@ -7,7 +7,7 @@ public class final_stats : MonoBehaviour
     public TextMeshPro finalScoreDisplay;
     void Start()
     {
-        finalScoreDisplay.text = "FINAL SCORE: " + BallController.score;
+        finalScoreDisplay.text = "FINAL SCORE: " + BallController.score + "\nHIGHEST COMBO: " + BallController.highestMult + "\nBALLS LOST: " + BallController.ballsLost;
     }
 
     // Update is called once per frame

@@ -1052,6 +1052,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 572444776}
     - target: {fileID: 3284146719190942760, guid: f36109669e3d5ba41afdbf25498eea1c, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1932157433}
+    - target: {fileID: 3284146719190942760, guid: f36109669e3d5ba41afdbf25498eea1c, type: 3}
       propertyPath: Score
       value: 
       objectReference: {fileID: 1971970250}

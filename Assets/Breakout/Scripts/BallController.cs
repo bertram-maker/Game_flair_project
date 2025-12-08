@@ -26,6 +26,9 @@ public class BallController : MonoBehaviour
     
     //save blocker as a variable
     public BlockerController BLC;
+
+    //save animator as avariable
+    public Animator anim;
     
     //saves the score text as a variable
     public TextMeshPro ScoreDisplay;
@@ -39,6 +42,10 @@ public class BallController : MonoBehaviour
     private float StartAngle;
     //saves the original paddle speed
     private float PaddleSpeed;
+
+    //end stats that will displayed at the end
+    public static float highestMult;
+    public static float ballsLost = 0;
     
     
     void Start()
@@ -54,6 +61,7 @@ public class BallController : MonoBehaviour
 
         ScoreDisplay.text = "Score: " + score;
         mult = startMult;
+        highestMult = startMult;
         
     }
 
@@ -69,6 +77,8 @@ public class BallController : MonoBehaviour
             //reset score
             mult = startMult;
             ScoreDisplay.text = "Score: " + score;
+            //update balls lost
+            ballsLost += 1;
         }
     }
 
@@ -77,9 +87,9 @@ public class BallController : MonoBehaviour
         //If I hit something, I'm going to bounce. Let's calculate my new velocity
         Vector2 vel = RB.linearVelocity;
         
-        //play animation for hit
-        
-        
+        //play animation
+        StartCoroutine(BounceAnim());
+
         //Did I hit the paddle?
         PaddleController pc = other.gameObject.GetComponent<PaddleController>();
         if (pc != null)
@@ -89,7 +99,8 @@ public class BallController : MonoBehaviour
             //I should also be aimed based on where I hit the paddle
             //I ask the paddle to calculate this for me
             vel.x = pc.BounceAngle(this);
-            
+
+
             //make ball speed up vertically
             if (vel.y <= BallSpeedCap && vel.y > (BallSpeedCap * -1))
             {
@@ -129,6 +140,10 @@ public class BallController : MonoBehaviour
                 }
             }
             //reset score
+            if (mult > highestMult)
+            {
+                highestMult = mult;
+            }
             mult = startMult;
             ScoreDisplay.text = "Score: " + score;
         }
@@ -194,4 +209,12 @@ public class BallController : MonoBehaviour
             yield return new WaitForSeconds(0.9f);
         }
     }
+    
+    IEnumerator BounceAnim()
+    {
+        anim.Play("bounce");
+        yield return new WaitForSeconds(0.1f);
+        anim.Play("idle");
+    }
+    
 }

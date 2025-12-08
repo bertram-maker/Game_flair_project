@@ -31,6 +31,14 @@ public class BrickController : MonoBehaviour
         ParticleSystem.MainModule mainModule = ps.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(SR.color);
         
+        //delay breaking the brick to give the particle effect time to spawn.
+        StartCoroutine(break_delay());
+
+    }
+
+    IEnumerator break_delay()
+    {
+        yield return new WaitForSeconds(0.08f);
         Destroy(gameObject);
     }
 
