@@ -86,6 +86,8 @@ public class BallController : MonoBehaviour
             //reset score
             mult = startMult;
             ScoreDisplay.text = "Score: " + score;
+            //reset animation
+            CamAnim.Play("cam_idle");
             //update balls lost
             ballsLost += 1;
         }
@@ -156,6 +158,8 @@ public class BallController : MonoBehaviour
             }
             mult = startMult;
             ScoreDisplay.text = "Score: " + score;
+            //reset animation
+            CamAnim.Play("cam_idle");
         }
         
         //Did I hit the blocker?
@@ -187,6 +191,10 @@ public class BallController : MonoBehaviour
             if (mult > 1)
             {
                 StartCoroutine(messageQue());
+                if (mult > 5)
+                {
+                    CamAnim.Play("flash");
+                }
             }
             else
             {
