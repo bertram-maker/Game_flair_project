@@ -30,6 +30,14 @@ public class BallController : MonoBehaviour
     //save animator as avariable
     public Animator anim;
     
+    //saves the Audio Source as a variable
+    public AudioSource AS;
+    public AudioClip ballhit;
+    
+    //saves the camera as a variable
+    public Camera Cam;
+    private Animator CamAnim;
+    
     //saves the score text as a variable
     public TextMeshPro ScoreDisplay;
     //score
@@ -62,7 +70,8 @@ public class BallController : MonoBehaviour
         ScoreDisplay.text = "Score: " + score;
         mult = startMult;
         highestMult = startMult;
-        
+        CamAnim = Cam.GetComponent<Animator>();
+        CamAnim.Play("cam_idle");
     }
 
     void Update()
@@ -89,6 +98,7 @@ public class BallController : MonoBehaviour
         
         //play animation
         StartCoroutine(BounceAnim());
+        AS.PlayOneShot(ballhit);
 
         //Did I hit the paddle?
         PaddleController pc = other.gameObject.GetComponent<PaddleController>();

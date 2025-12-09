@@ -9,6 +9,9 @@ public class BrickController : MonoBehaviour
     public SpriteRenderer SR;
     public ParticleSystem ParticlePrefab;
     private Color brick_color;
+    //sounds
+    public AudioSource AS;
+    public AudioClip brickBreak;
     
     void Start()
     {
@@ -17,7 +20,6 @@ public class BrickController : MonoBehaviour
         BreakoutManager.Me.AllBricks.Add(this);
         //Make yourself a random color
         SR.color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
-        //brick_color = SR.color;
     }
 
     //This code makes the brick break
@@ -33,6 +35,7 @@ public class BrickController : MonoBehaviour
         
         //delay breaking the brick to give the particle effect time to spawn.
         StartCoroutine(break_delay());
+        AS.PlayOneShot(brickBreak);
 
     }
 
