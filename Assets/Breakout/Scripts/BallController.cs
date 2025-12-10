@@ -32,7 +32,10 @@ public class BallController : MonoBehaviour
     
     //saves the Audio Source as a variable
     public AudioSource AS;
+    
+    //sounds
     public AudioClip ballhit;
+    public AudioClip comboGet;
     
     //saves the camera as a variable
     public Camera Cam;
@@ -194,6 +197,10 @@ public class BallController : MonoBehaviour
                 if (mult > 5)
                 {
                     CamAnim.Play("flash");
+                    if (mult == 6)
+                    {
+                        AS.PlayOneShot(comboGet);
+                    }
                 }
             }
             else

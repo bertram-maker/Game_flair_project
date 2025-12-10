@@ -20,6 +20,9 @@ public class BreakoutManager : MonoBehaviour
     //I keep a list of all bricks that exist
     public List<BrickController> AllBricks;
     
+    //saves audio source as variable
+    public AudioSource AS;
+    
     //brick placement locations
     float brickx = -6.8f;
     float bricky = 4;
@@ -42,6 +45,7 @@ public class BreakoutManager : MonoBehaviour
                 brickx = -6.8f;
             }
         }
+        AS.Play();
     }
 
     void Update()
@@ -50,6 +54,7 @@ public class BreakoutManager : MonoBehaviour
         if (AllBricks.Count == 0)
         {
             //If so, win
+            AS.Stop();
             SceneManager.LoadScene("You Win");
         }
     }
