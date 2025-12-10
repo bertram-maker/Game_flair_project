@@ -23,6 +23,10 @@ public class BreakoutManager : MonoBehaviour
     //saves audio source as variable
     public AudioSource AS;
     
+    //saves animator as variable
+    public Animator Anim;
+    
+    
     //brick placement locations
     float brickx = -6.8f;
     float bricky = 4;
@@ -46,6 +50,7 @@ public class BreakoutManager : MonoBehaviour
             }
         }
         AS.Play();
+        Anim.Play("fade_idle");
     }
 
     void Update()
@@ -54,11 +59,17 @@ public class BreakoutManager : MonoBehaviour
         if (AllBricks.Count == 0)
         {
             //If so, win
-            AS.Stop();
-            SceneManager.LoadScene("You Win");
+            StartCoroutine(win());
         }
     }
 
+    IEnumerator win()
+    {
+        AS.Stop();
+        Anim.Play("fade");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("You Win");
+    }
 
     
 }
